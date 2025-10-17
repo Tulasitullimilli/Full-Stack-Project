@@ -39,7 +39,7 @@ export class Leave extends Model<Leave>{
     leaveType:('casualLeave'|'sickLeave')
 
     @Column({
-        type:DataType.ENUM('approved','reject','pending'),
+        type:DataType.ENUM('approved','rejected','pending'),
         allowNull:false,
         defaultValue:'pending'
     })

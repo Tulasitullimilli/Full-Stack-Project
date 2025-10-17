@@ -52,12 +52,26 @@ export class UserService {
    }
 
    async allPendingLeaves(){
-    return this.leaveModel.findAll({where:{status:"pending"}})
+    return this.leaveModel.findAll({where:{status:"pending"},  include: [
+    {
+      model: User,
+      attributes: ['name', 'email'],
+    },
+  ],})
    }
 
-   viewLeaves(){
-    return this.leaveModel.findAll();
-   }
+  async viewLeaves() {
+  return this.leaveModel.findAll({
+    include: [
+      {
+        model: this.userModel,
+        attributes: ['id', 'name', 'email'],
+      },
+    ],
+    order: [['id', 'DESC']],
+  });
+}
+
 
    async employeeView(userId:number){
    const employeeId = await  this.leaveModel.findAll({where:{userId}})

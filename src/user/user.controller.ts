@@ -35,9 +35,9 @@ export class UserController {
         return this.userService.approveStatus(id,body.status)
     }
 
-     @UseGuards(AuthGuard('jwt'),RoleGuard)
+    @UseGuards(AuthGuard('jwt'),RoleGuard)
     @Roles('manager')
-    @Get()
+    @Get('fetchmanager')
     allPendingList(){
         return this.userService.allPendingLeaves()
     }
